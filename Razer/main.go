@@ -1,2 +1,2 @@
-package myblog
+package main
 
