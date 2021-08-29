@@ -2,9 +2,12 @@ package util
 
 import (
 	"crypto/md5"
-	"fmt"
+	"encoding/hex"
+	"io"
 )
 
 func MD5(str string) string {
-	return fmt.Sprintf("%x",md5.Sum([]byte(str))
+	hasher := md5.New()
+	io.WriteString(hasher,str)
+	return hex.EncodeToString(hasher.Sum(nil))
 }
