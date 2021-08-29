@@ -12,8 +12,10 @@ func InitRoute()*gin.Engine  {
 
 	//静态资源加载
 	r.Static("/static","./static")
-	r.Use(gin.Logger())
 
+
+	//首页
+	r.GET("/",controller.HomePageGet())
 	//登录
 	r.GET("/login",controller.LoginGet())
 	r.POST("/login",controller.LoginPost())
