@@ -1,8 +1,7 @@
 package model
 
 import (
-	"github.com/gin-gonic/gin"
-	"myblog/database"
+	"fmt"
 )
 
 type User struct {
@@ -14,6 +13,20 @@ type User struct {
 	CreateAt int 	`json:"create_at"`
 }
 
-func UserGet(where string,args ...interface{})  {
+func UserGet(where string,args ...interface{})(*User,error) {
 	var obj User
- 	has, err :=
+	has, err := DB.Where(where, args...).Get(&obj)
+	if err != nil{
+		fmt.Print("unable to get user")
+	}
+
+	if !has{
+		return nil,nil
+	}
+
+	return &obj,nil
+}
+
+func UserGetByUsername(username string)(*User,error)  {
+	return UserGet("username = ?",username)
+}

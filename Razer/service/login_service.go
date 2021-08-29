@@ -1,7 +1,7 @@
 package service
 
 import (
-	"crypto"
+	"myblog/model"
 	"myblog/util"
 )
 
@@ -11,6 +11,14 @@ func UserIsExist(username,password string)bool  {
 	//MD5转换密码
 	password = util.MD5(password)
 
-	//查到id
-	id :=
+	//通过username查询
+	user,err := model.UserGetByUsername(username)
+	if err != nil{
+		return false
+	}
+	if user != nil {
+		return true
+	}else {
+		return false
+	}
 }
